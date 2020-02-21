@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        {% block css %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+   
+        {% block js %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+        {% block stylesheets %}
+           
+        {% endblock %}
+
+    </head>
+    <body>
+
+    <!-- ajpouter un style avec bulma pour la barre de notre page -->
+        
+        {% block  barre %}
+ 
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://bulma.io">
+                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                    </a>
+
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item" href='{{ path("home") }}'>
+                            Home
+                        </a>
+
+                        <a class="navbar-item">
+                            Documentation
+                        </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                More
+                            </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                liste
+                            </a>
+                            <a class="navbar-item">
+                                Jobs
+                            </a>
+                            <a class="navbar-item">
+                                Contact
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Report an issue
+                            </a>
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                Catégorie
+                            </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href='{{ path("categorie_liste") }}'>
+                                Liste  
+                            </a>
+                            <a class="navbar-item" href='{{ path("categorie_add") }}'>
+                                Ajouter
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-primary" href='{{ path("membre_add") }}' >
+                                    <strong>Inscription</strong>    
+                                </a>
+                                <a class="button is-light" href='{{ path("app_login") }}'>
+                                    Log in
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        {% endblock %}
+
+        
+
+
+    <!-- ajpouter le lien pour catégorie -->
+        {% block  nav %}
+            
+            {% for message in app.flashes('success') %} 
+                <div class = "alert alert-success" > 
+                    {{ message }} 
+                </div > 
+            {% endfor %}
+            
+
+        {% endblock %}
+ 
+
+        {% block body %}
+            <div class="row">
+                <aside class="col-4">
+                    <form method="POST">
+                        <div>
+                            <label>Catégorie</label>
+                            <select name="categorie">
+                                <option value="">Toutes les catégories</option>
+                                {% for cat in categories %}
+                                        <option value='{{ cat.id }}'>  {{ cat.titre }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Régions</label>
+                            <select name="region">
+                                <option value="">Toutes les régions</option>
+                                {% for ville in regions %}
+                                        <option value="{{ ville.ville }}">  {{ ville.ville }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label>Membres</label>
+                            <select name="membre">
+                                <option value="">Tous les membres</option>
+                                {% for m in membres %}
+                                        <option value='{{ m.id }}'>  {{ m.pseudo }} </option>
+                                {% endfor %}                                
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Prix</label>
+                            <input type=range name="prix" min=0 max=10000>
+                        </div>
+                        
+                        <button>Filtrer</button>
+                    </form>
+                </aside>
+
+                <section class="col-8">
+                    {% for ann in annonces %}
+                        <p>{{ ann.titre }}</p>
+                    {% endfor %}                                
+                </section>
+            </div>
+        
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
+

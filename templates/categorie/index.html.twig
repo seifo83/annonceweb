@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>Ajouter une catégorie </h1>
+
+    <section class="section has_background_white_ter">
+        {{ form_start(form) }}
+            {{form_row(form.titre)}}
+            {{form_row(form.motscles)}}
+
+          <br><button class="button is-primary is-fullwidth">Ajouter</button><br>
+        {{ form_end(form)}}
+     
+    
+    </section>
+
+
+
+
+{% endblock %}

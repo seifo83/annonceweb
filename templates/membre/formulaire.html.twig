@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>Inscription </h1>
+
+    <section class="section has_background_white_ter">
+        {{ form_start(form) }}
+
+                {{form_row(form.email)}}
+                {{form_row(form.roles)}}
+                {{form_row(form.password)}}
+                {{form_row(form.pseudo)}}
+                {{form_row(form.nom)}}
+                {{form_row(form.prenom)}}
+                {{form_row(form.telephone)}}
+                {{form_row(form.civilite)}}
+                {{form_row(form.date_enregistrement)}}
+                <button class="button is-primary is-fullwidth">Entrer</button>
+       
+       {{form_end(form)}}
+    
+    </section>
+
+
+
+
+{% endblock %}
