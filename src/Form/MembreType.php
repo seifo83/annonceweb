@@ -23,7 +23,8 @@ class MembreType extends AbstractType
             ->add('password',  RepeatedType::class, array(
                                                             'type' => PasswordType::class,
                                                              'first_options'  => array('label' => 'Password'),
-                                                             'second_options' => array('label' => 'Repeat Password')))
+                                                             //'second_options' => array('label' => 'Repeat Password')
+                                                             ))
             ->add('pseudo', TextType::class)
             ->add('nom')
             ->add('prenom')
